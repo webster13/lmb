@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC
+        "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.learn.lmb.mapper.CarMapper">
+
+    <resultMap id="carResult" type="Car">
+
+        <result property="id" column="car_id"/>
+        <result property="bland" column="car_bland"/>
+        <result property="color" column="car_color"/>
+        <association property="owner" javaType="User">
+            <result property="id" column="user_id"/>
+            <result property="username" column="user_username"/>
+            <result property="password" column="user_password"/>
+        </association>
+
+    </resultMap>
+
+    <select id="findById" parameterType="Integer" resultMap="carResult">
+        SELECT
+            car.id        AS car_id,
+            car.bland     AS car_bland,
+            car.color     AS car_color,
+            user.id       AS user_id,
+            user.username AS user_username,
+            user.password AS user_password
+        FROM car, user
+        WHERE car.id = #{id} AND user.id = car.owner_id;
+    </select>
+</mapper>

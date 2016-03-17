@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<!--
+********************************************************************************
+*       Mybatis 配置文件
+********************************************************************************
+-->
+<configuration>
+
+    <settings>
+        <!--  设置插入空值时不需要指定类型 ,default:OTHER，-->
+        <setting name="jdbcTypeForNull" value="NULL"/>
+        <!--  使用驼峰命名法转换字段。default:false -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+
+    </settings>
+    <!--设置别名，可以在 *Mapper.xml 中直接使用类名，但类必须加注解 @Alias("user") -->
+    <typeAliases>
+        <package name="com.learn.lmb.entity"/>
+    </typeAliases>
+    <typeHandlers>
+        <!-- 由于自定义的TypeHandler在定义时已经通过注解指定了jdbcType, 所以此处不用再配置jdbcType -->
+        <!--<typeHandler handler="com.webster.jsm.core.util.UserTypeHandler"/>-->
+        <typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="java.math.RoundingMode"/>
+    </typeHandlers>
+
+</configuration>
+
